@@ -119,7 +119,7 @@ function handleCardClick(event) {
       
         // when the game is finsihed, alert the message with the current score. 
         if (cardsFlipped === COLORS.length){
-          window.confirm("Your Score is " + score + ". Game is now over, game will reset");
+          window.confirm("Your Score is " + score + ". Game is now over");
           nums.push(score);
 
           // setting the localStorage. 
