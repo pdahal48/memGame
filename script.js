@@ -130,7 +130,7 @@ function handleCardClick(event) {
 
     } 
         // Reset the colors when reset button is clicked on.
-    reset.addEventListener('click', function (e) {
+      reset.addEventListener('click', function (e) {
       e.preventDefault();
       location.reload();
       })
