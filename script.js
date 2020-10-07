@@ -25,7 +25,15 @@ const COLORS = [
   "orange",
   "purple"
 ];
+//checking to see if the localStorage is empty. if it is, set the highScore to 0
+const getInitialScore = JSON.parse(localStorage.getItem('nums'));
+if (getInitialScore === null) {
+  console.log("Previous Game Score is null")
+  const initialScore = localStorage.setItem('nums', '0');
+  JSON.stringify(initialScore);
+}
 
+let previousGameScore = JSON.parse(localStorage.getItem('nums'));
 
 function shuffle(array) {
   let counter = array.length;
@@ -62,8 +70,7 @@ function createDivsForColors(colorArray) {
 // setting up an array for localStorage.
 let nums = new Array ();
 let numClick = 0;
-// calling on localstorage
-const previousGameScore = JSON.parse(localStorage.getItem('nums'));
+
 // appending the score on the line of Previous Game Score
 prevScore.append(previousGameScore);
 
@@ -116,17 +123,22 @@ function handleCardClick(event) {
         }
         // The logic for calculating score.
         let score = Math.round((10/numClick)*100);
+        console.log("Previous Game Score is: " + previousGameScore);
       
-        // when the game is finsihed, alert the message with the current score. 
+        // when the game is finsihed, alert with the current score. 
         if (cardsFlipped === COLORS.length){
           window.confirm("Your Score is " + score + ". Game is now over");
           nums.push(score);
 
-          // setting the localStorage. 
+
+          console.log("Previous Game Score REALLY is: " + previousGameScore);
+
+          // setting the localStorage. Updating only if current score is higher than previous score
+          if (score > previousGameScore) {
           let JSONReadyNumbers = JSON.stringify(nums);
           localStorage.setItem('nums', JSONReadyNumbers);
+          }
       }
-
 
     } 
         // Reset the colors when reset button is clicked on.
